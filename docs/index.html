@@ -1,17 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <title>Panic Report</title>
+        <style>
+            @import url('https://static.lzc.app/fonts/segoeui/');
 
-<head>
-    <title>Panic Report</title>
-</head>
+            html {
+                color: white;
+                font-size: 1em;
+                font-weight: 300;
+                background-color: #0078d7;
+                font-family: 'Segoe UI', sans-serif;
+            }
 
-<body>
-    <h1>Panic Report</h1>
-    <div id="main">
-    </div>
+            body {
+                user-select: none;
+                text-align: left;
+                justify-content: center;
+            }
 
-    <script src="https://cdn.bootcdn.net/ajax/libs/pako/2.1.0/pako_inflate.js"></script>
-    <script type="text/javascript" src="panic_report.js"></script>
-</body>
+            #main p {
+                font-family: monospace;
+                line-height: 1.1;
+                white-space: pre-wrap; /* Preserve whitespace and line breaks */
+            }
 
+            @media screen and (orientation: portrait) {
+                #container {
+                    margin-left: 9vw;
+                    width: 84%;
+                }
+
+                #emoticon {
+                    font-size: 18vmin;
+                    margin-top: 10vh;
+                    margin-bottom: 4vh;
+                }
+
+                #main table {
+                    font-size: 1.5em;
+                    margin-bottom: 3vh;
+                }
+            }
+
+            @media screen and (orientation: landscape) {
+                #container {
+                    margin-left: 16vw;
+                    width: 80vw;
+                }
+
+                #emoticon {
+                    font-size: 18vmin;
+                    margin-top: 6vh;
+                    margin-bottom: 5vh;
+                }
+
+                #main table {
+                    font-size: 1em;
+                    margin-bottom: 3vh;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="container">
+            <p id="emoticon">:(</p>
+            <div id="main"></div>
+
+            <script src="https://cdn.bootcdn.net/ajax/libs/pako/1.0.9/pako_inflate.min.js"></script>
+            <script type="text/javascript" src="panic_report.js"></script>
+        </div>
+    </body>
 </html>

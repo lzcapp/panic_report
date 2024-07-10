@@ -5,6 +5,8 @@ const urlParams = new URLSearchParams(queryString);
 
 let main_div = document.getElementById('main');
 
+let table = document.createElement("table");
+
 function numbers_to_data(numbers) {
     const num_chars_to_bits = [0, 4, 7, 10, 13];
     const length_in_bits = Math.floor(numbers.length / 4) * 13 + num_chars_to_bits[numbers.length % 4];
@@ -48,25 +50,28 @@ function numbers_to_data(numbers) {
 
 function add_info(name, param) {
     const value = urlParams.get(param);
+    let tr = document.createElement("tr");
+    let nameCell = document.createElement("td");
+    nameCell.textContent = name;
+    tr.appendChild(nameCell);
     if (value) {
-        let div = document.createElement("div");
-        let n = document.createElement("b");
-        n.innerHTML = name + ": ";
-        div.appendChild(n);
-        div.appendChild(document.createTextNode(value));
-        main_div.appendChild(div);
+        let valueCell = document.createElement("td");
+        valueCell.innerHTML = "&emsp;" + value;
+        tr.appendChild(valueCell);
+        table.appendChild(tr);
     }
 }
 
 add_info("Arch", "a");
 add_info("Version", "v");
 add_info("Distribution", "d");
+main_div.appendChild(table)
 
 const numbers = urlParams.get("zl");
 data = numbers_to_data(numbers);
 uncompressed = pako.inflate(new Uint8Array(data));
 text = String.fromCharCode.apply(null, uncompressed);
 
-kmsg = document.createElement("pre");
+kmsg = document.createElement("p");
 kmsg.appendChild(document.createTextNode(text));
 main_div.appendChild(kmsg);
